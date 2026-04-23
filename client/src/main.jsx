@@ -5,7 +5,7 @@ import App from './App.jsx'
 import axios from 'axios'
 
 // Set up axios defaults
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'https://profolio-4rwl.onrender.com';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -32,6 +32,7 @@ const SkillTests = () => {
       setTests(response.data);
     } catch (error) {
       console.error('Failed to fetch tests:', error);
+      alert('Failed to load skill tests. Please check your internet connection.');
     } finally {
       setLoading(false);
     }
@@ -48,6 +49,7 @@ const SkillTests = () => {
       setResults(null);
     } catch (error) {
       console.error('Failed to start test:', error);
+      alert('Failed to start test. Please try again.');
     }
   };
 
@@ -59,6 +61,13 @@ const SkillTests = () => {
 
   const handleSubmitTest = async () => {
     if (submitting) return;
+    
+    // Check if all questions are answered
+    const unansweredQuestions = answers.filter(answer => answer === null).length;
+    if (unansweredQuestions > 0) {
+      alert(`Please answer all questions before submitting. ${unansweredQuestions} question(s) remaining.`);
+      return;
+    }
     
     setSubmitting(true);
     try {
@@ -73,6 +82,7 @@ const SkillTests = () => {
       setTestCompleted(true);
     } catch (error) {
       console.error('Failed to submit test:', error);
+      alert('Failed to submit test. Please try again.');
     } finally {
       setSubmitting(false);
     }
